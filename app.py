@@ -290,7 +290,7 @@ elif radio_select == "전략미사용":
         #st.table(tmp_df)
         # 성공문구 + 풍선이 날리는 특수효과 
         st.sidebar.success("Filter Applied!")
-        st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
+        #st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
         #st.balloons()
 else:
     st.write("추가 중")
