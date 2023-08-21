@@ -61,7 +61,7 @@ if radio_select == "절대모멘텀":
     # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
     # return : list
     select_multi_species = st.sidebar.multiselect(
-        '종목을 선택하세요. (복수선택가능)',
+        '종목을 선택하세요 (복수선택가능)',
         stock_name
         #['setosa','versicolor','virginica']
     
@@ -98,7 +98,7 @@ if radio_select == "절대모멘텀":
             #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
         )
         slider_range2 = st.sidebar.slider(
-            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+            "전략2 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
              1, #시작 값 
              200, #끝 값  
              value=60
@@ -113,14 +113,14 @@ if radio_select == "절대모멘텀":
             #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
         )
         slider_range2 = st.sidebar.slider(
-            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+            "전략2 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
              1, #시작 값 
              200, #끝 값  
              value=60
             #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
         )
         slider_range3 = st.sidebar.slider(
-            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+            "전략3 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
              1, #시작 값 
              200, #끝 값  
              value=60
@@ -208,7 +208,7 @@ if radio_select == "절대모멘텀":
         st.sidebar.success("Filter Applied!")
         #st.toast('portfolio 수익률을 확인해보세요', icon='😍')
         #st.balloons()
-elif radio_select == "전략 미사용":
+elif radio_select == "전략미사용":
     # 2. multi select
     # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
     # return : list
@@ -290,7 +290,7 @@ elif radio_select == "전략 미사용":
         #st.table(tmp_df)
         # 성공문구 + 풍선이 날리는 특수효과 
         st.sidebar.success("Filter Applied!")
-        #st.toast('portfolio 수익률을 확인해보세요', icon='😍')
+        st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
         #st.balloons()
 else:
     st.write("추가 중")
