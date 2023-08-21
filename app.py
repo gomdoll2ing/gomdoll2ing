@@ -21,7 +21,7 @@ st.sidebar.title('Stock Analysis📊')
 
 ## 날짜/시간 Input
 import datetime
-past = st.sidebar.date_input("날짜를 선택하세요(start)", datetime.datetime.now()-datetime.timedelta(days=30))
+past = st.sidebar.date_input("날짜를 선택하세요(start)", datetime.datetime.now()-datetime.timedelta(days=365))
 today = st.sidebar.date_input("날짜를 선택하세요(end)", datetime.datetime.now())
 
 # 날짜 간의 차이 계산
@@ -75,7 +75,8 @@ if radio_stock=='Stock':
     
     if radio_select == "이동평균선_전략":
         if date_difference < datetime.timedelta(days=40):
-            st.write("날짜 기간이 너무 짧습니다")
+            original_title = '<p style="font-family:Courier; color:Red; font-size: 30px;">날짜 기간이 너무 짧습니다</p>'
+            st.sidebar.markdown(original_title, unsafe_allow_html=True)
         # 2. multi select
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
         # return : list
@@ -397,7 +398,8 @@ else:
     
     if radio_select == "이동평균선_전략":
         if date_difference < datetime.timedelta(days=40):
-            st.write("날짜 기간이 너무 짧습니다")
+            original_title = '<p style="font-family:Courier; color:Red; font-size: 30px;">날짜 기간이 너무 짧습니다</p>'
+            st.sidebar.markdown(original_title, unsafe_allow_html=True)
         # 2. multi select
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
         # return : list
