@@ -50,8 +50,8 @@ df = pd.DataFrame({"stock_code":tickers,"stock_name":stock_name})
 # 3. Radio / Slider
 # 라디오에 선택한 내용을 radio select변수에 담습니다
 radio_select =st.sidebar.radio(
-    "what is key column?",
-    ["전략미사용",'절대모멘텀','고배당전략'])
+    "원하는 전략을 선택하세요",
+    ["전략미사용",'절대모멘텀','고배당전략(제작중)'])
     #horizontal=True)
 #radio_select = "절대모멘텀"
 ############################################################################################################################################
@@ -77,13 +77,55 @@ if radio_select == "절대모멘텀":
     ############################################################################################################################################
     # 3. Slider
     # 선택한 컬럼의 값의 범위를 지정할 수 있는 slider를 만듭니다. 
-    slider_range = st.sidebar.slider(
-        "choose range of key column",
-         1, #시작 값 
-         200, #끝 값  
-         value=60
-        #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
-    )
+    radio_ma =st.sidebar.radio(
+        "전략에 사용할 이평선 갯수를 고르세요",
+        [1,2,3])
+    
+    if radio_ma == 1:
+        slider_range1 = st.sidebar.slider(
+            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+             1, #시작 값 
+             200, #끝 값  
+             value=60
+            #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+        )
+    elif radio_ma==2:
+        slider_range1 = st.sidebar.slider(
+            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+             1, #시작 값 
+             200, #끝 값  
+             value=60
+            #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+        )
+        slider_range2 = st.sidebar.slider(
+            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+             1, #시작 값 
+             200, #끝 값  
+             value=60
+            #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+        )
+    else:
+        slider_range1 = st.sidebar.slider(
+            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+             1, #시작 값 
+             200, #끝 값  
+             value=60
+            #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+        )
+        slider_range2 = st.sidebar.slider(
+            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+             1, #시작 값 
+             200, #끝 값  
+             value=60
+            #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+        )
+        slider_range3 = st.sidebar.slider(
+            "전략1 : 해당 이평선 위에 있을 때 매수, 아래에 있을 때 매도",
+             1, #시작 값 
+             200, #끝 값  
+             value=60
+            #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+        )
     
     # 필터 적용버튼 생성 
     start_button = st.sidebar.button(
@@ -103,14 +145,26 @@ if radio_select == "절대모멘텀":
                 df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
                 
                 if df_cump.shape[0] == 0:
-                    df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range).mean()
-                    df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma"],1,0)
+                    df_tmp["ma1"] = df_tmp["종가"].shift(1).rolling(slider_range1).mean()
+                    if radio_ma > 1:
+                        df_tmp["ma2"] = df_tmp["종가"].shift(1).rolling(slider_range2).mean()
+                        if radio_ma > 2:
+                            df_tmp["ma3"] = df_tmp["종가"].shift(1).rolling(slider_range3).mean()
+                            
+                    df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma1"],1,0)
+                    if radio_ma > 1:
+                        df_tmp["flag2"] = np.where(df_tmp["종가"] > df_tmp["ma2"],1,0)
+                        df_tmp["flag"] *= df_tmp["flag2"]
+                        if radio_ma > 2:
+                            df_tmp["flag3"] = np.where(df_tmp["종가"] > df_tmp["ma3"],1,0)
+                            df_tmp["flag"] *= df_tmp["flag3"]
+                            
                     df_tmp["flag_shift"] = df_tmp["flag"].shift(1)
                     df_tmp = df_tmp.dropna()
                     df_tmp["등락률"] = df_tmp["등락률"]*df_tmp["flag_shift"]
                     df_cump = df_tmp[["날짜","등락률"]].rename(columns={"등락률":code})
                 else:
-                    df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range).mean()
+                    df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range1).mean()
                     df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma"],1,0)
                     df_tmp["flag_shift"] = df_tmp["flag"].shift(1)
                     df_tmp = df_tmp.dropna()
@@ -130,7 +184,9 @@ if radio_select == "절대모멘텀":
             
             # Streamlit 애플리케이션 생성
             st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
-            
+            st.write("")
+            st.write("연율화 수익률 : " + str(qs.stats.cagr(df_tmp["등락률"]).round(3)*100)+'%' + "\nMDD : " + str(qs.stats.max_drawdown(df_tmp["등락률"]).round(3)*100)+"%")
+            st.write("")
             # 퀀트스탯 메트릭 정보 출력
             st.write("Portfolio Return")
             st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
