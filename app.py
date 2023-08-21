@@ -23,6 +23,14 @@ st.sidebar.title('Stock Analysis📊')
 import datetime
 past = st.sidebar.date_input("날짜를 선택하세요(start)", datetime.datetime.now()-datetime.timedelta(days=30))
 today = st.sidebar.date_input("날짜를 선택하세요(end)", datetime.datetime.now())
+
+# 날짜 간의 차이 계산
+date_difference = today - past
+
+# 차이를 일(day)로 변환하여 int로 표현
+difference_in_days = date_difference.days
+
+#st.write("날짜 차이 (일):", difference_in_days)
 #the_time = st.sidebar.time_input("시간을 입력하세요.", datetime.time())
 
 radio_stock =st.sidebar.radio(
@@ -66,6 +74,8 @@ if radio_stock=='Stock':
     ############################################################################################################################################
     
     if radio_select == "이동평균선_전략":
+        if date_difference < 30:
+            st.write("날짜 기간이 너무 짧습니다")
         # 2. multi select
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
         # return : list
@@ -194,7 +204,7 @@ if radio_stock=='Stock':
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
@@ -301,7 +311,7 @@ if radio_stock=='Stock':
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 
@@ -515,7 +525,7 @@ else:
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
@@ -623,7 +633,7 @@ else:
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 
