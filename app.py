@@ -52,8 +52,7 @@ df = pd.DataFrame({"stock_code":tickers,"stock_name":stock_name})
 radio_select =st.sidebar.radio(
     "what is key column?",
     ["전략 미사용",'절대모멘텀','고배당 전략'],
-    horizontal=True
-)
+    horizontal=True)
 
 ############################################################################################################################################
 
