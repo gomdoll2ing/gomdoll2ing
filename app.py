@@ -185,7 +185,8 @@ if radio_select == "절대모멘텀":
             # Streamlit 애플리케이션 생성
             st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
             st.write("")
-            st.write("연율화 수익률 : " + str(qs.stats.cagr(df_cump).round(3)*100)+'%' + "\nMDD : " + str(qs.stats.max_drawdown(df_cump).round(3)*100)+"%")
+            st.write("① 당신의 포트폴리오는 연 평균 수익률 " + str(qs.stats.cagr(df_cump).round(3)*100)+'% 이며')
+            st.write("② 최대 낙폭률은 " + str(qs.stats.max_drawdown(df_cump).round(3)*100)+"% 입니다")
             st.write("")
             # 퀀트스탯 메트릭 정보 출력
             st.write("Portfolio Return")
