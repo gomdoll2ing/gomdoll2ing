@@ -49,11 +49,11 @@ df = pd.DataFrame({"stock_code":tickers,"stock_name":stock_name})
 
 # 3. Radio / Slider
 # 라디오에 선택한 내용을 radio select변수에 담습니다
-radio_select =st.sidebar.radio(
-    "what is key column?",
-    ["전략 미사용",'절대모멘텀','고배당 전략'],
-    horizontal=True)
-
+#radio_select =st.sidebar.radio(
+#    "what is key column?",
+#    ["전략 미사용",'절대모멘텀','고배당 전략'],
+#    horizontal=True)
+radio_select = "절대모멘텀"
 ############################################################################################################################################
 
 if radio_select == "절대모멘텀":
