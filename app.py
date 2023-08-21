@@ -194,8 +194,8 @@ if radio_stock=='Stock':
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(qs.stats.cagr(df_cump).round(3)*100)+'% 이며')
-                st.write("최대 낙폭률은 " + str(qs.stats.max_drawdown(df_cump).round(3)*100)+"% 입니다")
+                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
                 st.write("Portfolio Return")
@@ -300,6 +300,10 @@ if radio_stock=='Stock':
                 
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
+                st.write("")
+                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
+                st.write("")
                 
                 # 퀀트스탯 메트릭 정보 출력
                 st.write("Portfolio Return")
@@ -511,8 +515,8 @@ else:
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(qs.stats.cagr(df_cump).round(3)*100)+'% 이며')
-                st.write("최대 낙폭률은 " + str(qs.stats.max_drawdown(df_cump).round(3)*100)+"% 입니다")
+                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
                 st.write("Portfolio Return")
@@ -618,6 +622,10 @@ else:
                 
                 # Streamlit 애플리케이션 생성
                 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
+                st.write("")
+                st.write("당신의 포트폴리오는 연 평균 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
+                st.write("")
                 
                 # 퀀트스탯 메트릭 정보 출력
                 st.write("Portfolio Return")
