@@ -19,7 +19,8 @@ st.sidebar.title('Stock Analysis📊')
 
 ## 날짜/시간 Input
 import datetime
-today = st.sidebar.date_input("날짜를 선택하세요.", datetime.datetime.now())
+past = st.sidebar.date_input("날짜를 선택하세요(start)", datetime.datetime.now())
+today = st.sidebar.date_input("날짜를 선택하세요(end)", datetime.datetime.now())
 #the_time = st.sidebar.time_input("시간을 입력하세요.", datetime.time())
 
 tickers = stock.get_market_ticker_list(str(today).replace("-",""), market="ALL")
@@ -139,7 +140,7 @@ if radio_select == "절대모멘텀":
         if len(select_multi_species) != 0:
             df_cump = pd.DataFrame()
             for code in code_list:
-                df_tmp = stock.get_market_ohlcv("20000101",str(today).replace("-",""), code).dropna()
+                df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                 df_tmp["등락률"]=df_tmp["등락률"]/100
                 df_tmp = df_tmp.reset_index()
                 df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
@@ -258,7 +259,7 @@ elif radio_select == "전략미사용":
         if len(select_multi_species) != 0:
             df_cump = pd.DataFrame()
             for code in code_list:
-                df_tmp = stock.get_market_ohlcv("20000101",str(today).replace("-",""), code).dropna()
+                df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                 df_tmp["등락률"]=df_tmp["등락률"]/100
                 df_tmp = df_tmp.reset_index()
                 df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
