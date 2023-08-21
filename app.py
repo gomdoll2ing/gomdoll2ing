@@ -207,6 +207,26 @@ if radio_select == "절대모멘텀":
         #st.table(tmp_df)
         # 성공문구 + 풍선이 날리는 특수효과 
         st.sidebar.success("Filter Applied!")
+        html = """
+        <iframe src="https://coupa.ng/cd8kRY" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+        """
+        
+        st.sidebar.markdown(html, unsafe_allow_html=True)
+        
+        html2 = """
+        <iframe src="https://coupa.ng/cd8kY9" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+        """
+        
+        st.sidebar.markdown(html2, unsafe_allow_html=True)
+        
+        html3 = """
+        <iframe src="https://coupa.ng/cd8k1U" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+        """
+        
+        st.sidebar.markdown(html3, unsafe_allow_html=True)
+        
+        original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+        st.sidebar.markdown(original_title, unsafe_allow_html=True)
         #st.toast('portfolio 수익률을 확인해보세요', icon='😍')
         #st.balloons()
 elif radio_select == "전략미사용":
@@ -291,6 +311,26 @@ elif radio_select == "전략미사용":
         #st.table(tmp_df)
         # 성공문구 + 풍선이 날리는 특수효과 
         st.sidebar.success("Filter Applied!")
+        html = """
+        <iframe src="https://coupa.ng/cd8kRY" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+        """
+        
+        st.sidebar.markdown(html, unsafe_allow_html=True)
+        
+        html2 = """
+        <iframe src="https://coupa.ng/cd8kY9" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+        """
+        
+        st.sidebar.markdown(html2, unsafe_allow_html=True)
+        
+        html3 = """
+        <iframe src="https://coupa.ng/cd8k1U" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+        """
+        
+        st.sidebar.markdown(html3, unsafe_allow_html=True)
+        
+        original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+        st.sidebar.markdown(original_title, unsafe_allow_html=True)
         #st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
         #st.balloons()
 else:
