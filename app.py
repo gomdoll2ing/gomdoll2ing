@@ -74,7 +74,7 @@ if radio_stock=='Stock':
     ############################################################################################################################################
     
     if radio_select == "이동평균선_전략":
-        if date_difference < 30:
+        if date_difference < datetime.timedelta(days=30):
             st.write("날짜 기간이 너무 짧습니다")
         # 2. multi select
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
@@ -396,6 +396,8 @@ else:
     ############################################################################################################################################
     
     if radio_select == "이동평균선_전략":
+        if date_difference < datetime.timedelta(days=30):
+            st.write("날짜 기간이 너무 짧습니다")
         # 2. multi select
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
         # return : list
