@@ -21,7 +21,7 @@ st.sidebar.title('Stock Analysis📊')
 
 ## 날짜/시간 Input
 import datetime
-past = st.sidebar.date_input("날짜를 선택하세요(start)", datetime.datetime.now())
+past = st.sidebar.date_input("날짜를 선택하세요(start)", datetime.datetime.now()-datetime.timedelta(days=30))
 today = st.sidebar.date_input("날짜를 선택하세요(end)", datetime.datetime.now())
 #the_time = st.sidebar.time_input("시간을 입력하세요.", datetime.time())
 
@@ -350,7 +350,7 @@ else:
     stock_name = []
     
     for ticker in tickers:
-        stock_name.append(stock.get_market_ticker_name(ticker))
+        stock_name.append(stock.get_etf_ticker_name(ticker))
         
     df = pd.DataFrame({"stock_code":tickers,"stock_name":stock_name})
         
