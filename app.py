@@ -747,10 +747,11 @@ else:
         
         # Score 컬럼 값에 따라 색상 지정
         def color_score(val):
-            color = 'green' if val >= 80 else 'red'
-            return f'color: {color}'
+            color = 'background-color: green' if val >= 3 else 'background-color: red'
+            return color
         
-        div_df = div_df.style.applymap(color_score, subset=['배당수익률'])
+        div_df = div_df.style.applymap(color_score, subset=pd.IndexSlice[:, ['배당수익률']])
+
         
         # Styler 객체를 HTML로 변환하여 출력
         st.write(div_df.to_html(escape=False), unsafe_allow_html=True)
