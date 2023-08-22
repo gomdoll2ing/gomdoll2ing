@@ -222,29 +222,46 @@ if radio_stock=='주식':
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 
+                iframe_html1 = """
+                <div style='display: flex;'>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8Ap8" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8AqO" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8Art" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                </div>
+                """
+                
+                st.markdown(iframe_html1, unsafe_allow_html=True)
+                
                 #st.line_chart(df_cump)
             
             #tmp_df= tmp_df[ (tmp_df[radio_select] >= slider_range[0]) & (tmp_df[radio_select] <= slider_range[1])]
             #st.table(tmp_df)
             # 성공문구 + 풍선이 날리는 특수효과 
             st.sidebar.success("Filter Applied!")
-            html = """
-            <iframe src="https://coupa.ng/cd8kRY" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            iframe_html = """
+            <div style='display: flex;'>
+                <div style='flex: 33.33%; padding-right: 10px;'>
+                    <iframe src="https://coupa.ng/cd8kRY" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+                <div style='flex: 33.33%; padding-right: 10px;'>
+                    <iframe src="https://coupa.ng/cd8kY9" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+                <div style='flex: 33.33%;'>
+                    <iframe src="https://coupa.ng/cd8k1U" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+            </div>
             """
             
-            st.sidebar.markdown(html, unsafe_allow_html=True)
-            
-            html2 = """
-            <iframe src="https://coupa.ng/cd8kY9" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-            st.sidebar.markdown(html2, unsafe_allow_html=True)
-            
-            html3 = """
-            <iframe src="https://coupa.ng/cd8k1U" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-            st.sidebar.markdown(html3, unsafe_allow_html=True)
+            st.sidebar.markdown(iframe_html, unsafe_allow_html=True)
             
             original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
             st.sidebar.markdown(original_title, unsafe_allow_html=True)
@@ -331,6 +348,25 @@ if radio_stock=='주식':
                 
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
+                
+                iframe_html1 = """
+                <div style='display: flex;'>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8Ap8" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8AqO" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8Art" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                </div>
+                """
+                
+                st.markdown(iframe_html1, unsafe_allow_html=True)
                 
                 #st.line_chart(df_cump)
             
@@ -589,29 +625,46 @@ else:
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 
+                iframe_html1 = """
+                <div style='display: flex;'>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8Ap8" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8AqO" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8Art" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                </div>
+                """
+                
+                st.markdown(iframe_html1, unsafe_allow_html=True)
+                
                 #st.line_chart(df_cump)
             
             #tmp_df= tmp_df[ (tmp_df[radio_select] >= slider_range[0]) & (tmp_df[radio_select] <= slider_range[1])]
             #st.table(tmp_df)
             # 성공문구 + 풍선이 날리는 특수효과 
             st.sidebar.success("Filter Applied!")
-            html = """
-            <iframe src="https://coupa.ng/cd8kRY" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            iframe_html = """
+            <div style='display: flex;'>
+                <div style='flex: 33.33%; padding-right: 10px;'>
+                    <iframe src="https://coupa.ng/cd8kRY" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+                <div style='flex: 33.33%; padding-right: 10px;'>
+                    <iframe src="https://coupa.ng/cd8kY9" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+                <div style='flex: 33.33%;'>
+                    <iframe src="https://coupa.ng/cd8k1U" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+            </div>
             """
             
-            st.sidebar.markdown(html, unsafe_allow_html=True)
-            
-            html2 = """
-            <iframe src="https://coupa.ng/cd8kY9" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-            st.sidebar.markdown(html2, unsafe_allow_html=True)
-            
-            html3 = """
-            <iframe src="https://coupa.ng/cd8k1U" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-            st.sidebar.markdown(html3, unsafe_allow_html=True)
+            st.sidebar.markdown(iframe_html, unsafe_allow_html=True)
             
             original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
             st.sidebar.markdown(original_title, unsafe_allow_html=True)
@@ -703,29 +756,46 @@ else:
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 
+                iframe_html1 = """
+                <div style='display: flex;'>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%; padding-right: 10px;'>
+                        <iframe src="https://coupa.ng/cd8Ap8" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8AqO" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                    <div style='flex: 33.33%;'>
+                        <iframe src="https://coupa.ng/cd8Art" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    </div>
+                </div>
+                """
+                
+                st.markdown(iframe_html1, unsafe_allow_html=True)
+                
                 #st.line_chart(df_cump)
             
             #tmp_df= tmp_df[ (tmp_df[radio_select] >= slider_range[0]) & (tmp_df[radio_select] <= slider_range[1])]
             #st.table(tmp_df)
             # 성공문구 + 풍선이 날리는 특수효과 
             st.sidebar.success("Filter Applied!")
-            html = """
-            <iframe src="https://coupa.ng/cd8kRY" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            iframe_html = """
+            <div style='display: flex;'>
+                <div style='flex: 33.33%; padding-right: 10px;'>
+                    <iframe src="https://coupa.ng/cd8kRY" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+                <div style='flex: 33.33%; padding-right: 10px;'>
+                    <iframe src="https://coupa.ng/cd8kY9" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+                <div style='flex: 33.33%;'>
+                    <iframe src="https://coupa.ng/cd8k1U" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                </div>
+            </div>
             """
             
-            st.sidebar.markdown(html, unsafe_allow_html=True)
-            
-            html2 = """
-            <iframe src="https://coupa.ng/cd8kY9" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-            st.sidebar.markdown(html2, unsafe_allow_html=True)
-            
-            html3 = """
-            <iframe src="https://coupa.ng/cd8k1U" width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-            st.sidebar.markdown(html3, unsafe_allow_html=True)
+            st.sidebar.markdown(iframe_html, unsafe_allow_html=True)
             
             original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
             st.sidebar.markdown(original_title, unsafe_allow_html=True)
