@@ -69,7 +69,7 @@ if radio_stock=='주식':
     # 라디오에 선택한 내용을 radio select변수에 담습니다
     radio_select =st.sidebar.radio(
         "원하는 전략을 선택하세요",
-        ["전략미사용",'이동평균선_전략','고배당전략'])
+        ["전략미사용",'이동평균선_전략','고배당_전략'])
         #horizontal=True)
     #radio_select = "절대모멘텀"
     ############################################################################################################################################
@@ -271,10 +271,12 @@ if radio_stock=='주식':
         ############################################################################################################################################
         # 3. Slider
         # 선택한 컬럼의 값의 범위를 지정할 수 있는 slider를 만듭니다. 
-        
+        start_button = st.sidebar.button(
+            "START 📊 "#"버튼에 표시될 내용"
+        )
         # button이 눌리는 경우 start_button의 값이 true로 바뀌게 된다.
         # 이를 이용해서 if문으로 버튼이 눌렸을 때를 구현 
-        if True:
+        if start_button:
             #slider input으로 받은 값에 해당하는 값을 기준으로 데이터를 필터링합니다.
             if len(select_multi_species) != 0:
                 df_cump = pd.DataFrame()
@@ -367,7 +369,7 @@ if radio_stock=='주식':
         dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(dps, unsafe_allow_html=True)
         
-        html_blog='한국 배당주 투자 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
+        html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
         st.markdown(html_blog,unsafe_allow_html=True)
         
         st.write(df)
@@ -408,7 +410,7 @@ else:
     # 라디오에 선택한 내용을 radio select변수에 담습니다
     radio_select =st.sidebar.radio(
         "원하는 ETF 전략을 선택하세요",
-        ["전략미사용",'이동평균선_전략',"고배당전략"]
+        ["전략미사용",'이동평균선_전략',"고배당_전략"]
         )
         #horizontal=True)
     #radio_select = "절대모멘텀"
@@ -613,9 +615,14 @@ else:
         # 3. Slider
         # 선택한 컬럼의 값의 범위를 지정할 수 있는 slider를 만듭니다. 
         
+        # 필터 적용버튼 생성 
+        start_button = st.sidebar.button(
+            "START 📊 "#"버튼에 표시될 내용"
+        )
+        
         # button이 눌리는 경우 start_button의 값이 true로 바뀌게 된다.
         # 이를 이용해서 if문으로 버튼이 눌렸을 때를 구현 
-        if True:
+        if start_button:
             #slider input으로 받은 값에 해당하는 값을 기준으로 데이터를 필터링합니다.
             if len(select_multi_species) != 0:
                 df_cump = pd.DataFrame()
@@ -707,7 +714,7 @@ else:
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
         
-        html_blog='한국 배당주 투자 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
+        html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
         st.markdown(html_blog,unsafe_allow_html=True)
         
         st.write(div_df)
@@ -719,10 +726,6 @@ else:
             
         st.markdown(html, unsafe_allow_html=True)
         
-        html2 = """
-            <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-        st.markdown(html2, unsafe_allow_html=True)
+        
 ############################################################################################################################################
 
