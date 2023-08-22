@@ -17,6 +17,9 @@ from quantstats.reports import html
 # 사이드바에 select box를 활용하여 종을 선택한 다음 그에 해당하는 행만 추출하여 데이터프레임을 만들고자합니다.
 st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
 st.write("자신의 전략을 직접 만들어보세요 (좌측 Filter를 열어주세요)")
+st.write("""위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로 투자 권유를 목적으로 하지 않습니다
+제공되는 정보는 오류 또는 지연이 발생할 수 있으며 제작자는 제공된 정보에 의한
+투자 결과에 대해 법적인 책임을 지지 않습니다""")
 st.write("")
 st.sidebar.title('Stock Analysis📊')
 
@@ -810,7 +813,7 @@ else:
         div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
 
         
-        etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 10개 종목 매수 전략</p>'
+        etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
         
         html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
