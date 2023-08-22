@@ -359,7 +359,14 @@ if radio_stock=='주식':
             #st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
             #st.balloons()
     else:
-        st.write("추가 중")
+        df = stock.get_market_fundamental_by_ticker(date='20230822', market="ALL")
+        df = df.sort_values("DIV", ascending=False).head(20)
+        df.index = [stock.get_market_ticker_name(s) for s in df.index]
+        df=df.rename(columns={"DIV":"배당수익률","DPS":"주당배당금"})
+        
+        dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
+        st.sidebar.markdown(dps, unsafe_allow_html=True)
+        st.write(df)
         
 else:
     tickers = stock.get_etf_ticker_list(str(today).replace("-",""))
@@ -391,7 +398,7 @@ else:
     # 라디오에 선택한 내용을 radio select변수에 담습니다
     radio_select =st.sidebar.radio(
         "원하는 ETF 전략을 선택하세요",
-        ["전략미사용",'이동평균선_전략']
+        ["전략미사용",'이동평균선_전략',"고배당전략"]
         )
         #horizontal=True)
     #radio_select = "절대모멘텀"
@@ -684,13 +691,11 @@ else:
             #st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
             #st.balloons()
     else:
-        df = stock.get_market_fundamental_by_ticker(date='20230822', market="ALL")
-        df = df.sort_values("DIV", ascending=False).head(20)
-        df.index = [stock.get_market_ticker_name(s) for s in df.index]
-        df=df.rename(columns={"DIV":"배당수익률","DPS":"주당배당금"})
+        div_df = stock.get_index_fundamental(date='20230822')
+        div_df = df.sort_values("배당수익률", ascending=False).head(20)
         
-        dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
-        st.sidebar.markdown(dps, unsafe_allow_html=True)
-        st.write(df)
+        etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
+        st.sidebar.markdown(etf_dps, unsafe_allow_html=True)
+        st.write(div_df)
 ############################################################################################################################################
 
