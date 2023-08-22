@@ -22,7 +22,7 @@ st.sidebar.title('Stock Analysis📊')
 
 ## 날짜/시간 Input
 import datetime
-past = st.sidebar.date_input("날짜를 선택하세요 (Start)", datetime.datetime.now()-datetime.timedelta(days=365))
+past = st.sidebar.date_input("날짜를 선택하세요 (Start)", datetime.datetime.now()-datetime.timedelta(days=365*30))
 today = st.sidebar.date_input("날짜를 선택하세요 (End)", datetime.datetime.now())
 
 # 날짜 간의 차이 계산
@@ -69,7 +69,7 @@ if radio_stock=='주식':
     # 라디오에 선택한 내용을 radio select변수에 담습니다
     radio_select =st.sidebar.radio(
         "원하는 전략을 선택하세요",
-        ["전략미사용",'이동평균선_전략','고배당전략(제작중)'])
+        ["전략미사용",'이동평균선_전략','고배당전략'])
         #horizontal=True)
     #radio_select = "절대모멘텀"
     ############################################################################################################################################
@@ -684,6 +684,13 @@ else:
             #st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
             #st.balloons()
     else:
-        st.write("추가 중")
+        df = stock.get_market_fundamental_by_ticker(date='20230822', market="ALL")
+        df = df.sort_values("DIV", ascending=False).head(20)
+        df.index = [stock.get_market_ticker_name(s) for s in df.index]
+        df=df.rename(columns={"DIV":"배당수익률","DPS":"주당배당금"})
+        
+        dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
+        st.sidebar.markdown(dps, unsafe_allow_html=True)
+        st.write(df)
 ############################################################################################################################################
 
