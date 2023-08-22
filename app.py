@@ -372,7 +372,7 @@ if radio_stock=='주식':
         html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
         st.markdown(html_blog,unsafe_allow_html=True)
         
-        st.dataframe(df)
+        st.table(df)
         st.write("")
         st.write("")
         
@@ -735,7 +735,7 @@ else:
         html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
         st.markdown(html_blog,unsafe_allow_html=True)
         
-        st.dataframe(div_df)
+        st.table(div_df)
         st.write("")
         st.write("")
         
