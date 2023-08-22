@@ -374,7 +374,7 @@ if radio_stock=='주식':
         
         # Score 컬럼 값에 따라 색상 지정
         def color_score(val):
-            color = 'background-color: green' if val >= 3 else 'background-color: red'
+            color = 'background-color: green' if val >= 10 else 'background-color: red'
             return color
         
         df = df.style.applymap(color_score, subset=pd.IndexSlice[:, ['배당수익률']])
