@@ -730,7 +730,10 @@ else:
         div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
 
         def format_percentage(value):
-            formatted_value = "{:.2}".format(round(value, 2))
+            if value >= 100:
+                formatted_value = int(round(value))
+            else:
+                formatted_value = round(value, 2)
             return formatted_value
         
         # apply 함수를 사용하여 모든 값에 format_percentage 함수 적용
