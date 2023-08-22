@@ -367,11 +367,8 @@ if radio_stock=='주식':
         dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(dps, unsafe_allow_html=True)
         
-        html_blog = """
-            <iframe src="https://blog.naver.com/koreanfinancetime/223119607639 width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-        st.markdown(html_blog, unsafe_allow_html=True)
+        html_blog='check out this [link](https://blog.naver.com/koreanfinancetime/223119607639)'
+        st.markdown(html_blog,unsafe_allow_html=True)
         
         st.write(df)
         
@@ -704,11 +701,8 @@ else:
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
         
-        html_blog = """
-            <iframe src="https://blog.naver.com/koreanfinancetime/223119607639 width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
-            """
-            
-        st.markdown(html_blog, unsafe_allow_html=True)
+        html_blog='check out this [link](https://blog.naver.com/koreanfinancetime/223119607639)'
+        st.markdown(html_blog,unsafe_allow_html=True)
         
         st.write(div_df)
 ############################################################################################################################################
