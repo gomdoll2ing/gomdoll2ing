@@ -376,7 +376,7 @@ if radio_stock=='주식':
             <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
             """
             
-        st.sidebar.markdown(html, unsafe_allow_html=True)
+        st.markdown(html, unsafe_allow_html=True)
         
 else:
     tickers = stock.get_etf_ticker_list(str(today).replace("-",""))
@@ -716,6 +716,6 @@ else:
             <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
             """
             
-        st.sidebar.markdown(html, unsafe_allow_html=True)
+        st.markdown(html, unsafe_allow_html=True)
 ############################################################################################################################################
 
