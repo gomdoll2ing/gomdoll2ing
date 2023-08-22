@@ -728,7 +728,7 @@ else:
     else:
         div_df = stock.get_index_fundamental(date='20230822')
         div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
-        # 값을 6.38% 형식으로 바꾸는 함수 정의
+
         def format_percentage(value):
             formatted_value = "{:.2}".format(round(value, 2))
             return formatted_value
