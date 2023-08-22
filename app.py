@@ -734,7 +734,7 @@ else:
             return formatted_value
         
         # apply 함수를 사용하여 모든 값에 format_percentage 함수 적용
-        div_df = div_df[["등락률","배당수익률"]].applymap(format_percentage)
+        div_df[["등락률","배당수익률"]] = div_df[["등락률","배당수익률"]].applymap(format_percentage)
         
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
