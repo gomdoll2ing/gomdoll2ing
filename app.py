@@ -380,6 +380,21 @@ if radio_stock=='주식':
             
         st.markdown(html, unsafe_allow_html=True)
         
+        html1 = """
+            <iframe src="https://coupa.ng/cd8Ap8" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html1, unsafe_allow_html=True)
+        
+        html2 = """
+            <iframe src="https://coupa.ng/cd8AqO" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html2, unsafe_allow_html=True)
+        
+        original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+        st.sidebar.markdown(original_title, unsafe_allow_html=True)
+        
 else:
     tickers = stock.get_etf_ticker_list(str(today).replace("-",""))
     stock_name = []
@@ -726,6 +741,20 @@ else:
             
         st.markdown(html, unsafe_allow_html=True)
         
+        html1 = """
+            <iframe src="https://coupa.ng/cd8Ap8" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html1, unsafe_allow_html=True)
+        
+        html2 = """
+            <iframe src="https://coupa.ng/cd8AqO" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html2, unsafe_allow_html=True)
+        
+        original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+        st.sidebar.markdown(original_title, unsafe_allow_html=True)
         
 ############################################################################################################################################
 
