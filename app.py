@@ -372,6 +372,13 @@ if radio_stock=='주식':
         html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
         st.markdown(html_blog,unsafe_allow_html=True)
         
+        # Score 컬럼 값에 따라 색상 지정
+        def color_score(val):
+            color = 'background-color: green' if val >= 3 else 'background-color: red'
+            return color
+        
+        df = df.style.applymap(color_score, subset=pd.IndexSlice[:, ['배당수익률']])
+        
         st.table(df)
         st.write("")
         st.write("")
