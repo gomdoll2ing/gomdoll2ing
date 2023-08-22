@@ -82,7 +82,7 @@ if radio_stock=='주식':
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
         # return : list
         select_multi_species = st.sidebar.multiselect(
-            '종목을 선택하세요 (복수선택가능)',
+            '[이동평균선_전략] 종목을 선택하세요 (복수선택가능)',
             stock_name
             #['setosa','versicolor','virginica']
         
