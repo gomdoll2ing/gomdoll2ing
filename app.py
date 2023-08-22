@@ -728,10 +728,16 @@ else:
     else:
         div_df = stock.get_index_fundamental(date='20230822')
         div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
+        
+        def format_percentage(value):
+            formatted_value = "{:.2}".format(round(value, 2))
+            return formatted_value
+        
+        div_df = div_df.applymap(format_percentage)
 
         def format_percentage(value):
             if value >= 100:
-                formatted_value = int(round(value))
+                formatted_value = int(value)
             else:
                 formatted_value = round(value, 2)
             return formatted_value
