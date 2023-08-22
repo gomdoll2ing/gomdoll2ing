@@ -342,13 +342,13 @@ if radio_stock=='주식':
             iframe_html = """
             <div style='display: flex;'>
                 <div style='flex: 33.33%; padding-right: 10px;'>
-                    <iframe src="https://coupa.ng/cd8kRY" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    <iframe src="https://coupa.ng/cd8kRY" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
                 </div>
                 <div style='flex: 33.33%; padding-right: 10px;'>
-                    <iframe src="https://coupa.ng/cd8kY9" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    <iframe src="https://coupa.ng/cd8kY9" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
                 </div>
                 <div style='flex: 33.33%;'>
-                    <iframe src="https://coupa.ng/cd8k1U" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+                    <iframe src="https://coupa.ng/cd8k1U" width="90" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
                 </div>
             </div>
             """
