@@ -243,6 +243,8 @@ if radio_stock=='주식':
                 st.markdown(iframe_html1, unsafe_allow_html=True)
                 
                 st.write("")
+                original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+                st.markdown(original_title, unsafe_allow_html=True)
                 st.write("")
                 st.write("위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로")
                 st.write("투자 권유를 목적으로 하지 않습니다")
@@ -378,6 +380,8 @@ if radio_stock=='주식':
                 
                 st.markdown(iframe_html1, unsafe_allow_html=True)
                 st.write("")
+                original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+                st.markdown(original_title, unsafe_allow_html=True)
                 st.write("")
                 st.write("위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로")
                 st.write("투자 권유를 목적으로 하지 않습니다")
@@ -662,12 +666,19 @@ else:
                 
                 st.markdown(iframe_html1, unsafe_allow_html=True)
                 st.write("")
+                original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+                st.markdown(original_title, unsafe_allow_html=True)
                 st.write("")
-                st.write("위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로")
-                st.write("투자 권유를 목적으로 하지 않습니다")
-                st.write("제공되는 정보는 오류 또는 지연이 발생할 수 있으며")
-                st.write("제작자는 제공된 정보에 의한")
-                st.write("투자 결과에 대해 법적인 책임을 지지 않습니다")
+                warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로</p>'
+                st.markdown(warning, unsafe_allow_html=True)
+                warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">투자 권유를 목적으로 하지 않습니다"</p>'
+                st.markdown(warning, unsafe_allow_html=True)
+                warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">제공되는 정보는 오류 또는 지연이 발생할 수 있으며</p>'
+                st.markdown(warning, unsafe_allow_html=True)
+                warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">제작자는 제공된 정보에 의한</p>'
+                st.markdown(warning, unsafe_allow_html=True)
+                warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">투자 결과에 대해 법적인 책임을 지지 않습니다</p>'
+                st.markdown(warning, unsafe_allow_html=True)
                 
                 #st.line_chart(df_cump)
             
@@ -801,6 +812,8 @@ else:
                 
                 st.markdown(iframe_html1, unsafe_allow_html=True)
                 st.write("")
+                original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+                st.markdown(original_title, unsafe_allow_html=True)
                 st.write("")
                 st.write("위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로")
                 st.write("투자 권유를 목적으로 하지 않습니다")
