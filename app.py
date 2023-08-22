@@ -727,7 +727,7 @@ else:
             #st.balloons()
     else:
         div_df = stock.get_index_fundamental(date='20230822')
-        div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
+        div_df = div_df.sort_values("배당수익률", ascending=False).head(20).round(2)
         
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
@@ -735,7 +735,7 @@ else:
         html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
         st.markdown(html_blog,unsafe_allow_html=True)
         
-        st.table(div_df.round(2))
+        st.table(div_df)
         st.write("")
         st.write("")
         
