@@ -730,14 +730,11 @@ else:
         div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
 
         def format_percentage(value):
-            if value >= 100:
-                formatted_value = int(round(value))
-            else:
-                formatted_value = round(value, 2)
+            formatted_value = "{:.2%}".format(round(value, 2))
             return formatted_value
         
         # apply 함수를 사용하여 모든 값에 format_percentage 함수 적용
-        div_df = div_df.applymap(format_percentage)
+        div_df = div_df[["등락률","배당수익률"]].applymap(format_percentage)
         
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
