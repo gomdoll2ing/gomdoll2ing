@@ -365,7 +365,7 @@ if radio_stock=='주식':
         df=df.rename(columns={"DIV":"배당수익률","DPS":"주당배당금"})
         
         dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
-        st.sidebar.markdown(dps, unsafe_allow_html=True)
+        st.markdown(dps, unsafe_allow_html=True)
         
         html_blog = """
             <iframe src="https://blog.naver.com/koreanfinancetime/223119607639 width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
@@ -373,7 +373,7 @@ if radio_stock=='주식':
             
         st.markdown(html_blog, unsafe_allow_html=True)
         
-        st.dataframe(df, use_container_width=True)
+        st.write(df)
         
 else:
     tickers = stock.get_etf_ticker_list(str(today).replace("-",""))
@@ -699,10 +699,10 @@ else:
             #st.balloons()
     else:
         div_df = stock.get_index_fundamental(date='20230822')
-        div_df = df.sort_values("배당수익률", ascending=False).head(20)
+        div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
         
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
-        st.sidebar.markdown(etf_dps, unsafe_allow_html=True)
+        st.markdown(etf_dps, unsafe_allow_html=True)
         
         html_blog = """
             <iframe src="https://blog.naver.com/koreanfinancetime/223119607639 width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
@@ -710,6 +710,6 @@ else:
             
         st.markdown(html_blog, unsafe_allow_html=True)
         
-        st.dataframe(div_df, use_container_width=True)
+        st.write(div_df)
 ############################################################################################################################################
 
