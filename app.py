@@ -221,6 +221,7 @@ if radio_stock=='주식':
                 
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
+                st.write("")
                 
                 iframe_html1 = """
                 <div style='display: flex;'>
@@ -348,6 +349,7 @@ if radio_stock=='주식':
                 
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
+                st.write("")
                 
                 iframe_html1 = """
                 <div style='display: flex;'>
@@ -624,6 +626,7 @@ else:
                 
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
+                st.write("")
                 
                 iframe_html1 = """
                 <div style='display: flex;'>
@@ -755,6 +758,7 @@ else:
                 
                 st.write("Monthly Return Histogram")
                 st.write(qs.plots.histogram(df_cump, show=False))
+                st.write("")
                 
                 iframe_html1 = """
                 <div style='display: flex;'>
