@@ -371,7 +371,7 @@ if radio_stock=='주식':
         st.markdown(html_blog,unsafe_allow_html=True)
         
         st.write(df)
-        
+        st.write("")
         html = """
             <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
             """
@@ -711,11 +711,18 @@ else:
         st.markdown(html_blog,unsafe_allow_html=True)
         
         st.write(div_df)
+        st.write("")
         
         html = """
             <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
             """
             
         st.markdown(html, unsafe_allow_html=True)
+        
+        html2 = """
+            <iframe src="https://coupa.ng/cd8An7" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html2, unsafe_allow_html=True)
 ############################################################################################################################################
 
