@@ -366,7 +366,14 @@ if radio_stock=='주식':
         
         dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.sidebar.markdown(dps, unsafe_allow_html=True)
-        st.write(df)
+        
+        html_blog = """
+            <iframe src="https://blog.naver.com/koreanfinancetime/223119607639 width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html_blog, unsafe_allow_html=True)
+        
+        st.dataframe(df, use_container_width=True)
         
 else:
     tickers = stock.get_etf_ticker_list(str(today).replace("-",""))
@@ -696,6 +703,13 @@ else:
         
         etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 30px;">배당수익률 상위 10개 종목 매수 전략</p>'
         st.sidebar.markdown(etf_dps, unsafe_allow_html=True)
-        st.write(div_df)
+        
+        html_blog = """
+            <iframe src="https://blog.naver.com/koreanfinancetime/223119607639 width="200" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+            """
+            
+        st.markdown(html_blog, unsafe_allow_html=True)
+        
+        st.dataframe(div_df, use_container_width=True)
 ############################################################################################################################################
 
