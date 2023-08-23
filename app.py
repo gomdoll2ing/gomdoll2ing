@@ -221,9 +221,16 @@ if radio_stock=='주식':
                         df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
                         df_cor = pd.concat([df_cor,df_tmp["등락률"].rename(columns={"등락률":stock.get_market_ticker_name(code)})],1)
                         
-                plt.figure(figsize=(15,15))
-                sns.heatmap(data = df_cor.corr(), annot=True, fmt = '.2f', linewidths=.5, cmap='Blues')
+                    sns.set(style="white")
+    
+                    cor = df_cor.corr()
                     
+                    f, ax = plt.subplots(figsize=(12, 12))
+                    sns.heatmap(cor, annot=True)
+                    
+                    plt.title('종목간 상관관계', size=30)
+                    
+                st.write("")
                 # 퀀트스탯 메트릭 정보 출력
                 st.write("Portfolio Return")
                 st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
