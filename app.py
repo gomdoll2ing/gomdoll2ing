@@ -241,20 +241,24 @@ if radio_stock=='주식':
                         else:
                             color = 'background-color: rgba(255, 0, 0, 0.5)'  # 빨간색, 투명도 0.5
                         return color
+                    st.write("")
+                    st.write("음의 선형 상관관계를 보일수록 보완이 되는 관계가 될 가능성이 높습니다")
                     st.table(cor.style.applymap(color_score))
                     
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
-                st.write("Portfolio Return")
+                st.write("누적 수익률과 Maximum DrawDown을 확인해보세요")
                 st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
                 
-                st.write("Monthly Return")
+                st.write("월별 수익률을 확인해보세요(계절/월별 특성 확인)")
                 st.write(qs.plots.monthly_heatmap(df_cump, show=False))
                 
-                st.write("Yearly Return")
+                st.write("연도별 수익률을 확인해보세요")
+                st.write("(연도별로 비슷할 수록 강건한 포트폴리오가 됩니다)")
                 st.write(qs.plots.yearly_returns(df_cump, show=False))
                 
-                st.write("Monthly Return Histogram")
+                st.write("월 수익률 히스토그램을 확인해보세요")
+                st.write("(평균이 0보다 크고 분포가 양수에 치우칠 수록 좋습니다)")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 st.write("")
                 
@@ -375,21 +379,56 @@ if radio_stock=='주식':
                 # Streamlit 애플리케이션 생성
                 #st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는")
+                st.write("연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 로')
+                st.write("10년 기준 " + str(round(((qs.stats.cagr(df_cump)+1)**10-1)*100,2))+'% 수익률 예상됩니다')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
-                
+                if len(code_list) >= 2:
+                    df_cor = list()
+                    new_column_names = []
+                    for code in code_list:
+                        new_column_names.append(stock.get_market_ticker_name(code))
+                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
+                        df_tmp["등락률"]=df_tmp["등락률"]/100
+                        df_tmp = df_tmp.reset_index()
+                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
+                        df_cor.append(df_tmp.iloc[:,-1].tolist())
+                    
+                    
+                    # 데이터프레임 변환 및 시각화
+                    df_cor = pd.DataFrame(df_cor).transpose()
+                    df_cor = df_cor.apply(lambda x:round(x,2))
+                    
+                    # 컬럼 이름 변경
+                    df_cor.columns = new_column_names
+                    
+                    cor = df_cor.corr()
+                    # 색상 및 투명도 설정
+                    def color_score(val):
+                        if val >= 0.5:
+                            color = 'background-color: rgba(0, 0, 255, 0.5)'  # 파란색, 투명도 0.5
+                        else:
+                            color = 'background-color: rgba(255, 0, 0, 0.5)'  # 빨간색, 투명도 0.5
+                        return color
+                    st.write("")
+                    st.write("음의 선형 상관관계를 보일수록 보완이 되는 관계가 될 가능성이 높습니다")
+                    st.table(cor.style.applymap(color_score))
+                    
+                st.write("")
                 # 퀀트스탯 메트릭 정보 출력
-                st.write("Portfolio Return")
+                st.write("누적 수익률과 Maximum DrawDown을 확인해보세요")
                 st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
                 
-                st.write("Monthly Return")
+                st.write("월별 수익률을 확인해보세요(계절/월별 특성 확인)")
                 st.write(qs.plots.monthly_heatmap(df_cump, show=False))
                 
-                st.write("Yearly Return")
+                st.write("연도별 수익률을 확인해보세요")
+                st.write("(연도별로 비슷할 수록 강건한 포트폴리오가 됩니다)")
                 st.write(qs.plots.yearly_returns(df_cump, show=False))
                 
-                st.write("Monthly Return Histogram")
+                st.write("월 수익률 히스토그램을 확인해보세요")
+                st.write("(평균이 0보다 크고 분포가 양수에 치우칠 수록 좋습니다)")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 st.write("")
                 
@@ -662,20 +701,56 @@ else:
                 # Streamlit 애플리케이션 생성
                 #st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는")
+                st.write("연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 로')
+                st.write("10년 기준 " + str(round(((qs.stats.cagr(df_cump)+1)**10-1)*100,2))+'% 수익률 예상됩니다')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
+                if len(code_list) >= 2:
+                    df_cor = list()
+                    new_column_names = []
+                    for code in code_list:
+                        new_column_names.append(stock.get_market_ticker_name(code))
+                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
+                        df_tmp["등락률"]=df_tmp["등락률"]/100
+                        df_tmp = df_tmp.reset_index()
+                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
+                        df_cor.append(df_tmp.iloc[:,-1].tolist())
+                    
+                    
+                    # 데이터프레임 변환 및 시각화
+                    df_cor = pd.DataFrame(df_cor).transpose()
+                    df_cor = df_cor.apply(lambda x:round(x,2))
+                    
+                    # 컬럼 이름 변경
+                    df_cor.columns = new_column_names
+                    
+                    cor = df_cor.corr()
+                    # 색상 및 투명도 설정
+                    def color_score(val):
+                        if val >= 0.5:
+                            color = 'background-color: rgba(0, 0, 255, 0.5)'  # 파란색, 투명도 0.5
+                        else:
+                            color = 'background-color: rgba(255, 0, 0, 0.5)'  # 빨간색, 투명도 0.5
+                        return color
+                    st.write("")
+                    st.write("음의 선형 상관관계를 보일수록 보완이 되는 관계가 될 가능성이 높습니다")
+                    st.table(cor.style.applymap(color_score))
+                    
+                st.write("")
                 # 퀀트스탯 메트릭 정보 출력
-                st.write("Portfolio Return")
+                st.write("누적 수익률과 Maximum DrawDown을 확인해보세요")
                 st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
                 
-                st.write("Monthly Return")
+                st.write("월별 수익률을 확인해보세요(계절/월별 특성 확인)")
                 st.write(qs.plots.monthly_heatmap(df_cump, show=False))
                 
-                st.write("Yearly Return")
+                st.write("연도별 수익률을 확인해보세요")
+                st.write("(연도별로 비슷할 수록 강건한 포트폴리오가 됩니다)")
                 st.write(qs.plots.yearly_returns(df_cump, show=False))
                 
-                st.write("Monthly Return Histogram")
+                st.write("월 수익률 히스토그램을 확인해보세요")
+                st.write("(평균이 0보다 크고 분포가 양수에 치우칠 수록 좋습니다)")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 st.write("")
                 
@@ -801,21 +876,56 @@ else:
                 # Streamlit 애플리케이션 생성
                 #st.title("DIY Strategy Evaluation")  # 웹 페이지 제목
                 st.write("")
-                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는")
+                st.write("연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 로')
+                st.write("10년 기준 " + str(round(((qs.stats.cagr(df_cump)+1)**10-1)*100,2))+'% 수익률 예상됩니다')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
-                
+                if len(code_list) >= 2:
+                    df_cor = list()
+                    new_column_names = []
+                    for code in code_list:
+                        new_column_names.append(stock.get_market_ticker_name(code))
+                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
+                        df_tmp["등락률"]=df_tmp["등락률"]/100
+                        df_tmp = df_tmp.reset_index()
+                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
+                        df_cor.append(df_tmp.iloc[:,-1].tolist())
+                    
+                    
+                    # 데이터프레임 변환 및 시각화
+                    df_cor = pd.DataFrame(df_cor).transpose()
+                    df_cor = df_cor.apply(lambda x:round(x,2))
+                    
+                    # 컬럼 이름 변경
+                    df_cor.columns = new_column_names
+                    
+                    cor = df_cor.corr()
+                    # 색상 및 투명도 설정
+                    def color_score(val):
+                        if val >= 0.5:
+                            color = 'background-color: rgba(0, 0, 255, 0.5)'  # 파란색, 투명도 0.5
+                        else:
+                            color = 'background-color: rgba(255, 0, 0, 0.5)'  # 빨간색, 투명도 0.5
+                        return color
+                    st.write("")
+                    st.write("음의 선형 상관관계를 보일수록 보완이 되는 관계가 될 가능성이 높습니다")
+                    st.table(cor.style.applymap(color_score))
+                    
+                st.write("")
                 # 퀀트스탯 메트릭 정보 출력
-                st.write("Portfolio Return")
+                st.write("누적 수익률과 Maximum DrawDown을 확인해보세요")
                 st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
                 
-                st.write("Monthly Return")
+                st.write("월별 수익률을 확인해보세요(계절/월별 특성 확인)")
                 st.write(qs.plots.monthly_heatmap(df_cump, show=False))
                 
-                st.write("Yearly Return")
+                st.write("연도별 수익률을 확인해보세요")
+                st.write("(연도별로 비슷할 수록 강건한 포트폴리오가 됩니다)")
                 st.write(qs.plots.yearly_returns(df_cump, show=False))
                 
-                st.write("Monthly Return Histogram")
+                st.write("월 수익률 히스토그램을 확인해보세요")
+                st.write("(평균이 0보다 크고 분포가 양수에 치우칠 수록 좋습니다)")
                 st.write(qs.plots.histogram(df_cump, show=False))
                 st.write("")
                 
