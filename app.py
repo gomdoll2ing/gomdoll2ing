@@ -250,6 +250,7 @@ if radio_stock=='주식':
                     cax = ax.matshow(cor, cmap=cmap)
                     plt.colorbar(cax, fraction=0.045, pad=0.05)
                     plt.title('종목간 상관관계', size=30)
+                    plt.show()
                     
                     st.pyplot(fig)  # 히트맵 그래프를 Streamlit에 표시합니다.
                     
