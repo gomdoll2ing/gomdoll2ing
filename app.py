@@ -710,7 +710,7 @@ else:
                     
                     # 데이터프레임 변환 및 시각화
                     df_cor = df_cor.iloc[:,1:]
-                    new_column_names = [stock.get_market_ticker_name(col) for col in df_cor.columns]
+                    new_column_names = [stock.get_etf_ticker_name(col) for col in df_cor.columns]
                     df_cor.columns = new_column_names
                     cor = df_cor.corr()
                     
@@ -875,9 +875,8 @@ else:
                 if len(code_list) >= 2:
                     
                     # 데이터프레임 변환 및 시각화
-                    st.table(df_cor)
                     df_cor = df_cor.iloc[:,1:]
-                    new_column_names = [stock.get_market_ticker_name(col) for col in df_cor.columns]
+                    new_column_names = [stock.get_etf_ticker_name(col) for col in df_cor.columns]
                     df_cor.columns = new_column_names
                     cor = df_cor.corr()
                     
