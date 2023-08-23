@@ -234,7 +234,7 @@ if radio_stock=='주식':
                     #df_cor = df_cor.apply(lambda x:round(x,2))
                     
                     # 컬럼 이름 변경
-                    # 
+                    st.table(df_cor)
                     df_cor = df_cor.drop("날짜",1)
                     new_column_names = [stock.get_market_ticker_name(col) for col in df_cor.columns]
                     df_cor.columns = new_column_names
