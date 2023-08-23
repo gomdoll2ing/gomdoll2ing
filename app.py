@@ -170,6 +170,7 @@ if radio_stock=='주식':
                     df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
                     
                     if df_cump.shape[0] == 0:
+                        df_cor = df_tmp[["날짜","등락률"]].rename(columns={"등락률":code})
                         df_tmp["ma1"] = df_tmp["종가"].shift(1).rolling(slider_range1).mean()
                         if radio_ma > 1:
                             df_tmp["ma2"] = df_tmp["종가"].shift(1).rolling(slider_range2).mean()
