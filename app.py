@@ -219,7 +219,7 @@ if radio_stock=='주식':
                         df_tmp["등락률"]=df_tmp["등락률"]/100
                         #st.write(df_tmp)
                         df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
-                        df_cor = pd.concat([df_cor,df_tmp.iloc[stock.get_market_ticker_name(code)]],1)
+                        df_cor = pd.concat([df_cor,df_tmp.loc[:,stock.get_market_ticker_name(code)]],1)
                         
                     sns.set(style="white")
     
