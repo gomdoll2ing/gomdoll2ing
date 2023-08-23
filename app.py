@@ -209,7 +209,7 @@ if radio_stock=='주식':
                 st.write("")
                 st.write("당신의 포트폴리오는")
                 st.write("연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 로')
-                st.write("10년 기준 " + str(((round(qs.stats.cagr(df_cump),2)+1)**10-1)*100)+'% 수익률 예상됩니다')
+                st.write("10년 기준 " + str(round(((qs.stats.cagr(df_cump)+1)**10-1)*100),2)+'% 수익률 예상됩니다')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 if len(code_list) >= 2:
