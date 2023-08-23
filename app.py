@@ -233,8 +233,12 @@ if radio_stock=='주식':
                     df_cor.columns = new_column_names
                     
                     cor = df_cor.corr()
+                    # 색상 및 투명도 설정
                     def color_score(val):
-                        color = 'background-color: blue' if val >= 0.5 else 'background-color: red'
+                        if val >= 0.5:
+                            color = 'background-color: rgba(0, 0, 255, 0.5)'  # 파란색, 투명도 0.5
+                        else:
+                            color = 'background-color: rgba(255, 0, 0, 0.5)'  # 빨간색, 투명도 0.5
                         return color
                     st.table(cor.style.applymap(color_score))
                     
