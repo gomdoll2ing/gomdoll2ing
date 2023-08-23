@@ -10,6 +10,8 @@ import quantstats as qs
 from quantstats.reports import html
 import seaborn as sns  
 
+plt.rcParams['font.family'] = 'NanumGothic' #: 한글 깨짐시 font 변경
+
 
 ############################################################################################################################################
 
