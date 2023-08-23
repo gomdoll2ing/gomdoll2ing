@@ -231,7 +231,7 @@ if radio_stock=='주식':
                     
                     # # 데이터프레임 변환 및 시각화
                     # df_cor = pd.DataFrame(df_cor).transpose()
-                    df_cor = df_cor.apply(lambda x:round(x,2))
+                    #df_cor = df_cor.apply(lambda x:round(x,2))
                     
                     # 컬럼 이름 변경
                     # df_cor.columns = new_column_names
