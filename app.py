@@ -234,8 +234,10 @@ if radio_stock=='주식':
                     #df_cor = df_cor.apply(lambda x:round(x,2))
                     
                     # 컬럼 이름 변경
-                    # df_cor.columns = new_column_names
-                    st.table(df_cor)
+                    # 
+                    df_cor = df_cor.drop("날짜",1)
+                    new_column_names = [stock.get_market_ticker_name(col) for col in df_cor.columns]
+                    df_cor.columns = new_column_names
                     cor = df_cor.corr()
                     # 색상 및 투명도 설정
                     def color_score(val):
