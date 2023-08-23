@@ -392,15 +392,7 @@ if radio_stock=='주식':
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 if len(code_list) >= 2:
-                    df_cor = list()
-                    new_column_names = []
-                    for code in code_list:
-                        new_column_names.append(stock.get_market_ticker_name(code))
-                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
-                        df_tmp["등락률"]=df_tmp["등락률"]/100
-                        df_tmp = df_tmp.reset_index()
-                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
-                        df_cor.append(df_tmp.iloc[:,-1].tolist())
+                    
                     
                     # 데이터프레임 변환 및 시각화
                     st.table(df_cor)
@@ -715,15 +707,6 @@ else:
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 if len(code_list) >= 2:
-                    df_cor = list()
-                    new_column_names = []
-                    for code in code_list:
-                        new_column_names.append(stock.get_etf_ticker_name(code))
-                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
-                        df_tmp["등락률"]=df_tmp["등락률"]/100
-                        df_tmp = df_tmp.reset_index()
-                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_etf_ticker_name(code)})
-                        df_cor.append(df_tmp.iloc[:,-1].tolist())
                     
                     
                     # 데이터프레임 변환 및 시각화
@@ -891,15 +874,7 @@ else:
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
                 if len(code_list) >= 2:
-                    df_cor = list()
-                    new_column_names = []
-                    for code in code_list:
-                        new_column_names.append(stock.get_etf_ticker_name(code))
-                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
-                        df_tmp["등락률"]=df_tmp["등락률"]/100
-                        df_tmp = df_tmp.reset_index()
-                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_etf_ticker_name(code)})
-                        df_cor.append(df_tmp.iloc[:,-1].tolist())
+                    
                     
                     
                     # 데이터프레임 변환 및 시각화
