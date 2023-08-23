@@ -219,18 +219,21 @@ if radio_stock=='주식':
                         df_tmp["등락률"]=df_tmp["등락률"]/100
                         df_tmp = df_tmp.reset_index()
                         df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
-                        st.write(df_tmp.iloc[:,-1])
                         df_cor.append(df_tmp.iloc[:,-1].tolist())
                     
+                
+                    # 데이터프레임 변환 및 시각화
                     df_cor = pd.DataFrame(df_cor).transpose()
                     sns.set(style="white")
-    
                     cor = df_cor.corr()
                     
-                    f, ax = plt.subplots(figsize=(12, 12))
-                    sns.heatmap(cor, annot=True)
+                    # Streamlit 애플리케이션 시작
+                    st.title('종목간 상관관계')
                     
-                    plt.title('종목간 상관관계', size=30)
+                    # 히트맵 그리기
+                    fig, ax = plt.subplots(figsize=(12, 12))
+                    sns.heatmap(cor, annot=True, ax=ax)
+                    st.pyplot(fig)  # 히트맵 그래프를 Streamlit에 표시합니다.
                     
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
