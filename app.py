@@ -217,8 +217,9 @@ if radio_stock=='주식':
                     for code in code_list:
                         df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                         df_tmp["등락률"]=df_tmp["등락률"]/100
+                        df_tmp = df_tmp.reset_index()
                         df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
-                        st.write(df_tmp.iloc[:,-1])
+                        #st.write(df_tmp.iloc[:,-1])
                         df_cor = pd.concat([df_cor,df_tmp.iloc[:,-1]],1)
                         
                     sns.set(style="white")
