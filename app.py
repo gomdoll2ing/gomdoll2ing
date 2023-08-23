@@ -216,7 +216,7 @@ if radio_stock=='주식':
                     df_cor = list()
                     new_column_names = []
                     for code in code_list:
-                        new_column_names.append(code)
+                        new_column_names.append(stock.get_market_ticker_name(code))
                         df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                         df_tmp["등락률"]=df_tmp["등락률"]/100
                         df_tmp = df_tmp.reset_index()
@@ -237,7 +237,7 @@ if radio_stock=='주식':
                     st.title('종목간 상관관계')
                     
                     # 히트맵 그리기
-                    fig, ax = plt.subplots(figsize=(12, 12))
+                    fig, ax = plt.subplots(figsize=(6, 6))
                     sns.heatmap(cor, annot=True, ax=ax)
                     st.pyplot(fig)  # 히트맵 그래프를 Streamlit에 표시합니다.
                     
