@@ -232,15 +232,25 @@ if radio_stock=='주식':
                     # 컬럼 이름 변경
                     df_cor.columns = new_column_names
                     
-                    sns.set(style="white")
                     cor = df_cor.corr()
                     
-                    # Streamlit 애플리케이션 시작
-                    st.title('종목간 상관관계')
+                    # 색상 맵 생성
+                    def custom_colormap():
+                        cmap = []
+                        for r in np.linspace(0, 1, 256):
+                            cmap.append((1, r, 0))  # 빨간색에서 흰색으로 이동
+                        for g in np.linspace(0, 1, 256):
+                            cmap.append((1 - g, 1, 0))  # 흰색에서 노란색으로 이동
+                        return cmap
+                    
+                    cmap = custom_colormap()
                     
                     # 히트맵 그리기
-                    fig, ax = plt.subplots(figsize=(6, 6))
-                    sns.heatmap(cor, annot=True, ax=ax)
+                    fig, ax = plt.subplots(figsize=(12, 12))
+                    cax = ax.matshow(cor, cmap=cmap)
+                    plt.colorbar(cax, fraction=0.045, pad=0.05)
+                    plt.title('종목간 상관관계', size=30)
+                    
                     st.pyplot(fig)  # 히트맵 그래프를 Streamlit에 표시합니다.
                     
                 st.write("")
