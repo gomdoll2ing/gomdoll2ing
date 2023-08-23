@@ -236,7 +236,7 @@ if radio_stock=='주식':
                     def color_score(val):
                         color = 'background-color: blue' if val >= 0.5 else 'background-color: red'
                         return color
-                    st.table(cor).style.applymap(color_score, subset=pd.IndexSlice[:, ['배당수익률']])
+                    st.table(cor.style.applymap(color_score, subset=pd.IndexSlice[:, ['배당수익률']]))
                     
                 st.write("")
                 # 퀀트스탯 메트릭 정보 출력
