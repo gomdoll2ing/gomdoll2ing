@@ -8,6 +8,7 @@ from pykrx import bond
 
 import quantstats as qs
 from quantstats.reports import html
+import seaborn as sns  
 
 
 ############################################################################################################################################
@@ -206,9 +207,23 @@ if radio_stock=='주식':
                 # Streamlit 애플리케이션 생성
                 
                 st.write("")
-                st.write("당신의 포트폴리오는 연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 이며')
+                st.write("당신의 포트폴리오는")
+                st.write("연율화 수익률 " + str(round(qs.stats.cagr(df_cump)*100,2))+'% 로')
+                st.write("10년 기준 " + str(((round(qs.stats.cagr(df_cump),2)+1)**10-1)*100)+'% 수익률 예상됩니다')
                 st.write("최대 낙폭률은 " + str(round(qs.stats.max_drawdown(df_cump)*100,2))+"% 입니다")
                 st.write("")
+                if len(code_list) >= 2:
+                    df_cor = pd.DataFrame()
+                    for code in code_list:
+                        df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
+                        df_tmp["등락률"]=df_tmp["등락률"]/100
+                        df_tmp = df_tmp.reset_index()
+                        df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
+                        df_cor = pd.concat([df_cor,df_tmp["등락률"].rename(columns={"등락률":stock.get_market_ticker_name(code)})],1)
+                        
+                plt.figure(figsize=(15,15))
+                sns.heatmap(data = df_cor.corr(), annot=True, fmt = '.2f', linewidths=.5, cmap='Blues')
+                    
                 # 퀀트스탯 메트릭 정보 출력
                 st.write("Portfolio Return")
                 st.write(qs.plots.snapshot(df_cump, title='Portfolio Return', show=False))
@@ -455,6 +470,9 @@ if radio_stock=='주식':
         original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
         st.markdown(original_title, unsafe_allow_html=True)
         
+        warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로 투자 권유를 목적으로 하지 않습니다. 제공되는 정보는 오류 또는 지연이 발생할 수 있으며 제작자는 제공된 정보에 의한 투자 결과에 대해 법적인 책임을 지지 않습니다.</p>'
+        st.markdown(warning, unsafe_allow_html=True)
+        
 else:
     tickers = stock.get_etf_ticker_list(str(today).replace("-",""))
     stock_name = []
@@ -691,8 +709,6 @@ else:
             original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
             st.sidebar.markdown(original_title, unsafe_allow_html=True)
             
-            warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로 투자 권유를 목적으로 하지 않습니다. 제공되는 정보는 오류 또는 지연이 발생할 수 있으며 제작자는 제공된 정보에 의한 투자 결과에 대해 법적인 책임을 지지 않습니다.</p>'
-            st.markdown(warning, unsafe_allow_html=True)
             
             #st.toast('portfolio 수익률을 확인해보세요', icon='😍')
             #st.balloons()
@@ -832,6 +848,7 @@ else:
             
             original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
             st.sidebar.markdown(original_title, unsafe_allow_html=True)
+            
             #st.toast('portfolio 수익률을 확인해보세요')# , icon='😍'
             #st.balloons()
     else:
@@ -839,7 +856,7 @@ else:
         div_df = div_df.sort_values("배당수익률", ascending=False).head(20)
 
         
-        etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 종목 매수 전략</p>'
+        etf_dps = '<p style="font-family:Courier; color:Blue; font-size: 20px;">배당수익률 상위 종목 매수 전략</p>'
         st.markdown(etf_dps, unsafe_allow_html=True)
         
         html_blog='한국 배당주 투자 참고 게시물 [link](https://blog.naver.com/koreanfinancetime/223119607639)'
@@ -881,6 +898,9 @@ else:
         
         original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
         st.markdown(original_title, unsafe_allow_html=True)
+        
+        warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로 투자 권유를 목적으로 하지 않습니다. 제공되는 정보는 오류 또는 지연이 발생할 수 있으며 제작자는 제공된 정보에 의한 투자 결과에 대해 법적인 책임을 지지 않습니다.</p>'
+        st.markdown(warning, unsafe_allow_html=True)
         
 ############################################################################################################################################
 
