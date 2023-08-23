@@ -403,6 +403,7 @@ if radio_stock=='주식':
                         df_cor.append(df_tmp.iloc[:,-1].tolist())
                     
                     # 데이터프레임 변환 및 시각화
+                    st.table(df_cor)
                     df_cor = df_cor.iloc[:,1:]
                     new_column_names = [stock.get_market_ticker_name(col) for col in df_cor.columns]
                     df_cor.columns = new_column_names
@@ -845,6 +846,7 @@ else:
             #slider input으로 받은 값에 해당하는 값을 기준으로 데이터를 필터링합니다.
             if len(select_multi_species) != 0:
                 df_cump = pd.DataFrame()
+                df_cor = pd.DataFrame()
                 for code in code_list:
                     df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                     df_tmp["등락률"] = df_tmp["종가"].pct_change().dropna()
@@ -853,6 +855,7 @@ else:
                     df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
                     
                     if df_cump.shape[0] == 0:
+                        df_cor = df_tmp[["날짜","등락률"]].rename(columns={"등락률":code})
                         #df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range).mean()
                         #df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma"],1,0)
                         #df_tmp["flag_shift"] = df_tmp["flag"].shift(1)
@@ -860,6 +863,7 @@ else:
                         #df_tmp["등락률"] = df_tmp["등락률"]*df_tmp["flag_shift"]
                         df_cump = df_tmp[["날짜","등락률"]].rename(columns={"등락률":code})
                     else:
+                        df_cor = pd.merge(df_cor,df_tmp[["날짜","등락률"]].rename(columns={"등락률":code}),on="날짜",how="left").dropna()
                         #df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range).mean()
                         #df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma"],1,0)
                         #df_tmp["flag_shift"] = df_tmp["flag"].shift(1)
@@ -899,13 +903,11 @@ else:
                     
                     
                     # 데이터프레임 변환 및 시각화
-                    df_cor = pd.DataFrame(df_cor).transpose()
-                    df_cor = df_cor.apply(lambda x:round(x,2))
-                    
-                    # 컬럼 이름 변경
+                    df_cor = df_cor.iloc[:,1:]
+                    new_column_names = [stock.get_market_ticker_name(col) for col in df_cor.columns]
                     df_cor.columns = new_column_names
-                    
                     cor = df_cor.corr()
+                    
                     # 색상 및 투명도 설정
                     def color_score(val):
                         if val >= 0.5:
