@@ -710,11 +710,11 @@ else:
                     df_cor = list()
                     new_column_names = []
                     for code in code_list:
-                        new_column_names.append(stock.get_market_ticker_name(code))
+                        new_column_names.append(stock.get_etf_ticker_name(code))
                         df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                         df_tmp["등락률"]=df_tmp["등락률"]/100
                         df_tmp = df_tmp.reset_index()
-                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
+                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_etf_ticker_name(code)})
                         df_cor.append(df_tmp.iloc[:,-1].tolist())
                     
                     
@@ -885,11 +885,11 @@ else:
                     df_cor = list()
                     new_column_names = []
                     for code in code_list:
-                        new_column_names.append(stock.get_market_ticker_name(code))
+                        new_column_names.append(stock.get_etf_ticker_name(code))
                         df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                         df_tmp["등락률"]=df_tmp["등락률"]/100
                         df_tmp = df_tmp.reset_index()
-                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_market_ticker_name(code)})
+                        df_tmp = df_tmp.rename(columns={"등락률":stock.get_etf_ticker_name(code)})
                         df_cor.append(df_tmp.iloc[:,-1].tolist())
                     
                     
