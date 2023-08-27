@@ -26,7 +26,7 @@ st.sidebar.title('Stock Analysis📊')
 ## 날짜/시간 Input
 import datetime
 past = st.sidebar.date_input("날짜를 선택하세요 (Start)", datetime.datetime.now()-datetime.timedelta(days=365*30))
-today = st.sidebar.date_input("날짜를 선택하세요 (End)", datetime.datetime.now())
+today = st.sidebar.date_input("날짜를 선택하세요 (End)", datetime.datetime.now()-datetime.timedelta(days=1))
 
 # 날짜 간의 차이 계산
 date_difference = today - past
@@ -85,7 +85,7 @@ if radio_stock=='주식':
         # 여러개 선택할 수 있을 때는 multiselect를 이용하실 수 있습니다 
         # return : list
         select_multi_species = st.sidebar.multiselect(
-            '[이동평균선_전략] 종목을 선택하세요 (복수선택가능)',
+            '주식 종목을 선택하세요 (복수선택가능)',
             stock_name
             #['setosa','versicolor','virginica']
         
