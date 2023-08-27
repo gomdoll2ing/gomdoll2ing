@@ -806,6 +806,21 @@ else:
         
         )
         
+        slider_range_prop = list()
+        prop_sum = 100
+        for s in select_multi_species:
+             slider_range_prop.append(st.sidebar.slider(
+                    s+" 종목의 포트폴리오 비중을 선택하세요",
+                     1, #시작 값 
+                     min(98,prop_sum-sum(slider_range_prop)), #끝 값  
+                     value=1
+                    #(2.5, 7.5) # 기본값, 앞 뒤로 2개 설정 /  하나만 하는 경우 value=2.5 이런 식으로 설정가능
+                ))
+             
+        st.sidebar.write("포트폴리오 비중 합 : "+str(sum(slider_range_prop))+"%")
+        st.sidebar.write("포트폴리오 비중 합이 100%가 되어야 Button이 활성화됩니다")
+        
+        slider_range_prop = list(np.array(slider_range_prop)/100)
         code_list = df[df["stock_name"].isin(select_multi_species)]["stock_code"]
         
         # 원래 dataframe으로 부터 꽃의 종류가 선택한 종류들만 필터링 되어서 나오게 일시적인 dataframe을 생성합니다
@@ -818,9 +833,10 @@ else:
         # 선택한 컬럼의 값의 범위를 지정할 수 있는 slider를 만듭니다. 
         
         # 필터 적용버튼 생성 
-        start_button = st.sidebar.button(
-            "START 📊 "#"버튼에 표시될 내용"
-        )
+        if sum(slider_range_prop) == 1:
+            start_button = st.sidebar.button(
+                "START 📊 "#"버튼에 표시될 내용"
+            )
         
         # button이 눌리는 경우 start_button의 값이 true로 바뀌게 된다.
         # 이를 이용해서 if문으로 버튼이 눌렸을 때를 구현 
@@ -829,6 +845,7 @@ else:
             if len(select_multi_species) != 0:
                 df_cump = pd.DataFrame()
                 df_cor = pd.DataFrame()
+                prop_cnt = 0
                 for code in code_list:
                     df_tmp = stock.get_market_ohlcv(str(past).replace("-",""),str(today).replace("-",""), code).dropna()
                     df_tmp["등락률"] = df_tmp["종가"].pct_change().dropna()
@@ -837,6 +854,7 @@ else:
                     df_tmp["날짜"] = df_tmp["날짜"].apply(lambda x:str(x)[:10])
                     
                     if df_cump.shape[0] == 0:
+                        df_tmp["등락률"] = df_tmp["등락률"]*slider_range_prop[prop_cnt]
                         df_cor = df_tmp[["날짜","등락률"]].rename(columns={"등락률":code})
                         #df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range).mean()
                         #df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma"],1,0)
@@ -845,6 +863,7 @@ else:
                         #df_tmp["등락률"] = df_tmp["등락률"]*df_tmp["flag_shift"]
                         df_cump = df_tmp[["날짜","등락률"]].rename(columns={"등락률":code})
                     else:
+                        df_tmp["등락률"] = df_tmp["등락률"]*slider_range_prop[prop_cnt]
                         df_cor = pd.merge(df_cor,df_tmp[["날짜","등락률"]].rename(columns={"등락률":code}),on="날짜",how="left").dropna()
                         #df_tmp["ma"] = df_tmp["종가"].shift(1).rolling(slider_range).mean()
                         #df_tmp["flag"] = np.where(df_tmp["종가"] > df_tmp["ma"],1,0)
@@ -852,9 +871,10 @@ else:
                         df_tmp = df_tmp.dropna()
                         #df_tmp["등락률"] = df_tmp["등락률"]*df_tmp["flag_shift"]
                         df_cump = pd.merge(df_cump,df_tmp[["날짜","등락률"]].rename(columns={"등락률":code}),on="날짜",how="left").dropna()
-                
+                    prop_cnt += 1
+                    
                 df_cump['날짜'] = pd.to_datetime(df_cump['날짜'])
-                df_cump = df_cump.set_index("날짜").mean(1)
+                df_cump = df_cump.set_index("날짜").sum(1)
                 #df_cump = (df_cump+1).cumprod()-1
                 
                 
