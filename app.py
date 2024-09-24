@@ -1,25 +1,41 @@
 import streamlit as st
 from langchain_community.document_loaders import YoutubeLoader
+from youtube_transcript_api import YouTubeTranscriptApi
+import re
 
-
-# Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
-    error_txt = "추출 버튼을 다시 한번 눌러주세요. "
-    for cnt in range(20):
+    error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요. "
+    
+    # Extract video ID from the YouTube URL
+    video_id = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11}).*", url).group(1)
+    
+    for cnt in range(10):
         try:
-            loader = YoutubeLoader.from_youtube_url(
-                url,
-                add_video_info=add_video_info,
-                language=language,
-            )
-            results = loader.load()
+            # Attempt to fetch the transcript
+            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+            
+            # Try to get the transcript in the desired language
+            try:
+                transcript = transcript_list.find_transcript([language])
+            except:
+                # Fallback to the manually translated transcripts
+                transcript = transcript_list.find_manually_created_transcript([language])
+            
+            results = transcript.fetch()
             if results:
-                return results[0].page_content
-            # else:
-            #     return "Error: No script available for this video in the selected language."
+                page_content = "\n".join([entry["text"] for entry in results])
+                
+                if add_video_info:
+                    # Optionally add video info like title
+                    from pytube import YouTube
+                    video = YouTube(url)
+                    page_content = f"Title: {video.title}\n\n{page_content}"
+                
+                return page_content
         except Exception as e:
             error_txt += str(e)
             continue
+    
     return f"Error: {error_txt}"
 
 # Initialize session state to store scripts
@@ -32,7 +48,7 @@ st.write("Enter a YouTube URL, and extract the video script!")
 
 # User inputs
 url = st.text_input("YouTube URL", "")
-language = st.selectbox("Select Language", ["ko", "en", "es", "fr", "de"])  # You can add more languages if needed
+language = st.selectbox("Select Language", ["ko", "en"])  # You can add more languages if needed
 
 
 if st.button("Extract Script"):
