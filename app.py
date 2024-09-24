@@ -11,6 +11,7 @@ def get_script(url, language="ko", add_video_info=True):
         )
         return loader.load()[0].page_content
     except Exception as e:
+        print(loader)
         return f"Error: {str(e)}"
 
 # Initialize session state to store scripts
