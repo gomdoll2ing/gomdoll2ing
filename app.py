@@ -2,7 +2,7 @@ import streamlit as st
 from langchain.document_loaders import YoutubeLoader
 
 # Function to extract script from YouTube URL
-def get_script(url, language="en", add_video_info=True):
+def get_script(url, language="ko", add_video_info=True):
     try:
         loader = YoutubeLoader.from_youtube_url(
             url,
@@ -40,6 +40,7 @@ if st.button("Extract Script"):
 
     warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로 투자 권유를 목적으로 하지 않습니다. 제공되는 정보는 오류 또는 지연이 발생할 수 있으며 제작자는 제공된 정보에 의한 투자 결과에 대해 법적인 책임을 지지 않습니다.</p></br>'
     st.markdown(warning, unsafe_allow_html=True)
+
     if url:
         with st.spinner("Extracting script... Please wait."):
             script = get_script(url, language)
