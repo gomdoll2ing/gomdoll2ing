@@ -4,19 +4,23 @@ from langchain_community.document_loaders import YoutubeLoader
 
 # Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
-    try:
-        loader = YoutubeLoader.from_youtube_url(
-            url,
-            add_video_info=add_video_info,
-            language=language,
-        )
-        results = loader.load()
-        if results:
-            return results[0].page_content
-        else:
-            return "Error: No script available for this video in the selected language."
-    except Exception as e:
-        return f"Error: {str(e)}"
+    error_txt = ""
+    for cnt in range(10):
+        try:
+            loader = YoutubeLoader.from_youtube_url(
+                url,
+                add_video_info=add_video_info,
+                language=language,
+            )
+            results = loader.load()
+            if results:
+                return results[0].page_content
+            else:
+                return "Error: No script available for this video in the selected language."
+        except Exception as e:
+            error_txt = str(e)
+            continue
+    return f"Error: {error_txt}"
 
 # Initialize session state to store scripts
 if "scripts" not in st.session_state:
