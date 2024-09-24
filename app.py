@@ -6,7 +6,7 @@ import time
 # Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
     error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요. "
-    for cnt in range(10):
+    for cnt in range(20):
         try:
             loader = YoutubeLoader.from_youtube_url(
                 url,
