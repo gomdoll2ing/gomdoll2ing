@@ -10,9 +10,13 @@ def get_script(url, language="ko", add_video_info=True):
             add_video_info=add_video_info,
             language=language,
         )
-        return loader.load()[0].page_content
+        results = loader.load()
+        if results:
+            return results[0].page_content
+        else:
+            return "Error: No script available for this video in the selected language."
     except Exception as e:
-        return f"Error: {str(loader.load()[0].page_content)}"
+        return f"Error: {str(e)}"
 
 # Initialize session state to store scripts
 if "scripts" not in st.session_state:
