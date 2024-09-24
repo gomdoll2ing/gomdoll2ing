@@ -27,8 +27,8 @@ if "scripts" not in st.session_state:
     st.session_state["scripts"] = []
 
 # Streamlit app
-st.title("YouTube Script Extractor with Sidebar")
-st.write("Enter a YouTube URL, and extract the video script in your desired language!")
+st.title("YouTube Script Extractor")
+st.write("Enter a YouTube URL, and extract the video script!")
 
 # User inputs
 url = st.text_input("YouTube URL", "")
@@ -82,6 +82,20 @@ if st.session_state["scripts"]:
 
     st.sidebar.subheader("Selected Script")
     st.sidebar.text_area("Script Content", selected_script_content, height=300, key="sidebar_script_display")
+
+    iframe_html = """
+        </br>
+        </br>
+        <iframe src="https://coupa.ng/cgeFzM" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
+        """
+        
+    st.sidebar.markdown(iframe_html, unsafe_allow_html=True)
+
+    original_title = '<p style="font-family:Courier; color:Orange; font-size: 12px;">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>'
+    st.sidebar.markdown(original_title, unsafe_allow_html=True)
+
+    warning = '<p style="font-family:Courier; color:Gray; font-size: 12px;">위 정보는 투자에 대한 이해를 돕기 위해 제공하는 것으로 투자 권유를 목적으로 하지 않습니다. 제공되는 정보는 오류 또는 지연이 발생할 수 있으며 제작자는 제공된 정보에 의한 투자 결과에 대해 법적인 책임을 지지 않습니다.</p></br>'
+    st.sidebar.markdown(warning, unsafe_allow_html=True)
 else:
     st.sidebar.write("No scripts extracted yet.")
 
