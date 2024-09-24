@@ -9,7 +9,7 @@ def get_script(url, language="ko", add_video_info=True):
     # Extract video ID from the YouTube URL
     video_id = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11}).*", url).group(1)
     
-    for cnt in range(100):
+    for cnt in range(1):
         try:
             # Attempt to fetch the transcript
             transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
