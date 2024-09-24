@@ -4,7 +4,7 @@ from langchain_community.document_loaders import YoutubeLoader
 
 # Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
-    error_txt = ""
+    error_txt = "추출 버튼을 다시 한번 눌러주세요. "
     for cnt in range(20):
         try:
             loader = YoutubeLoader.from_youtube_url(
@@ -18,7 +18,7 @@ def get_script(url, language="ko", add_video_info=True):
             # else:
             #     return "Error: No script available for this video in the selected language."
         except Exception as e:
-            error_txt = str(e)
+            error_txt += str(e)
             continue
     return f"Error: {error_txt}"
 
