@@ -1,41 +1,27 @@
 import streamlit as st
 from langchain_community.document_loaders import YoutubeLoader
-from youtube_transcript_api import YouTubeTranscriptApi
-import re
+import time
 
+
+# Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
     error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요. "
-    
-    # Extract video ID from the YouTube URL
-    video_id = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11}).*", url).group(1)
-    
-    for cnt in range(1):
+    for cnt in range(10):
         try:
-            # Attempt to fetch the transcript
-            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-            
-            # Try to get the transcript in the desired language
-            try:
-                transcript = transcript_list.find_transcript([language])
-            except:
-                # Fallback to the manually translated transcripts
-                transcript = transcript_list.find_manually_created_transcript([language])
-            
-            results = transcript.fetch()
+            loader = YoutubeLoader.from_youtube_url(
+                url,
+                add_video_info=add_video_info,
+                language=language,
+            )
+            results = loader.load()
             if results:
-                page_content = "\n".join([entry["text"] for entry in results])
-                
-                if add_video_info:
-                    # Optionally add video info like title
-                    from pytube import YouTube
-                    video = YouTube(url)
-                    page_content = f"Title: {video.title}\n\n{page_content}"
-                
-                return page_content
+                return results[0].page_content
+            # else:
+            #     return "Error: No script available for this video in the selected language."
         except Exception as e:
             error_txt += str(e)
+            time.sleep(1)
             continue
-    
     return f"Error: {error_txt}"
 
 # Initialize session state to store scripts
