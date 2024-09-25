@@ -3,16 +3,6 @@ from langchain_community.document_loaders import YoutubeLoader
 import time
 import requests
 
-requests_timeout = 60  # Set to 60 seconds or your preferred duration
-
-original_get = requests.get
-
-def custom_get(*args, **kwargs):
-    kwargs['timeout'] = requests_timeout
-    return original_get(*args, **kwargs)
-
-requests.get = custom_get
-
 # Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
     error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요. "
@@ -24,7 +14,7 @@ def get_script(url, language="ko", add_video_info=True):
                 language=language,
             )
             results = loader.load()
-            st.title(loader)
+            st.title(add_video_info+"/"+language)
             if results:
                 return results[0].page_content
             # else:
