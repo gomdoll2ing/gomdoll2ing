@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain_community.document_loaders import YoutubeLoader
 import time
-
+import requests
 
 # Function to extract script from YouTube URL
 def get_script(url, language="ko", add_video_info=True):
