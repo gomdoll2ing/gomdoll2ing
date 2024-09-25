@@ -7,6 +7,7 @@ import time
 def get_script(url, language="ko"):
     error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요."
     for cnt in range(5):
+        time.sleep(3)
         try:
             # Extract video ID from the URL
             video_id = url.split("v=")[-1].split("&")[0]
