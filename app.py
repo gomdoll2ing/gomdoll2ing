@@ -14,6 +14,7 @@ def get_script(url, language="ko", add_video_info=True):
                 language=language,
             )
             results = loader.load()
+            st.title(results)
             if results:
                 return results[0].page_content
             # else:
