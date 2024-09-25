@@ -12,6 +12,7 @@ def get_script(url, language="ko", add_video_info=True):
                 url,
                 add_video_info=add_video_info,
                 language=language,
+                timeout=60
             )
             results = loader.load()
             st.title(requests.get(url))
