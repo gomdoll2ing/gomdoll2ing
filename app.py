@@ -1,28 +1,43 @@
 import streamlit as st
-from langchain_community.document_loaders import YoutubeLoader
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound, VideoUnavailable
 import time
-import requests
 
-# Function to extract script from YouTube URL
-def get_script(url, language="ko", add_video_info=False):
-    error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요. "
+# Function to extract script using youtube_transcript_api
+def get_script(url, language="ko"):
+    error_txt = "사용자가 많습니다. 추출 버튼을 다시 한번 눌러주세요."
     for cnt in range(5):
         try:
-            loader = YoutubeLoader.from_youtube_url(
-                url,
-                add_video_info=add_video_info,
-                language=language,
-            )
-            results = loader.load()
-            st.title(language)
-            if results:
-                return results[0].page_content
-            # else:
-            #     return "Error: No script available for this video in the selected language."
+            # Extract video ID from the URL
+            video_id = url.split("v=")[-1].split("&")[0]
+
+            # Attempt to get the transcript
+            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+
+            if language in [t.language_code for t in transcript_list]:
+                transcript = transcript_list.find_transcript([language]).fetch()
+            else:
+                # Fall back to default language if the requested language is unavailable
+                transcript = transcript_list.find_transcript(['en']).fetch()
+
+            # Join the script text
+            script_text = " ".join([entry['text'] for entry in transcript])
+            return script_text
+
+        except TranscriptsDisabled:
+            error_txt += " 이 동영상에는 자막이 비활성화되어 있습니다."
+            break
+        except NoTranscriptFound:
+            error_txt += " 이 동영상에 해당하는 언어의 자막이 없습니다."
+            break
+        except VideoUnavailable:
+            error_txt += " 이 동영상을 찾을 수 없습니다."
+            break
         except Exception as e:
-            error_txt += str(e)
+            error_txt += f" 시도 {cnt + 1} 실패: {str(e)}"
             time.sleep(1)
             continue
+    
     return f"Error: {error_txt}"
 
 # Initialize session state to store scripts
@@ -36,7 +51,6 @@ st.write("Enter a YouTube URL, and extract the video script!")
 # User inputs
 url = st.text_input("YouTube URL", "")
 language = st.selectbox("Select Language", ["ko", "en"])  # You can add more languages if needed
-
 
 if st.button("Extract Script"):
     iframe_html = """
@@ -101,6 +115,7 @@ if st.session_state["scripts"]:
     st.sidebar.markdown(warning, unsafe_allow_html=True)
 else:
     st.sidebar.write("No scripts extracted yet.")
+
 
 
 
